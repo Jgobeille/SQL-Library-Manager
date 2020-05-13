@@ -1,7 +1,6 @@
-const book = require('../models').Book;
 const express = require('express');
-
-//creates mini express server
+const book = require('../models').Book;
+// creates mini express server
 const router = express.Router();
 
 /* Handler function to wrap each route. */
@@ -14,3 +13,5 @@ function asyncHandler(cb) {
     }
   };
 }
+
+module.exports = router;

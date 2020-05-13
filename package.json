@@ -1,29 +1,17 @@
 {
   "name": "sql-library-manager",
-  "version": "1.0.0",
-  "description": "A library manager app that uses SQLlite database. It uses Node and Sequelize to interact with the database",
-  "main": "app.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Jgobeille/SQL-Library-Manager.git"
-  },
-  "keywords": [
-    "SQL",
-    "Node",
-    "SQLlite",
-    "Techdegree"
-  ],
-  "author": "Jamie Gobeille",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Jgobeille/SQL-Library-Manager/issues"
-  },
-  "homepage": "https://github.com/Jgobeille/SQL-Library-Manager#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
     "nodemon": "^2.0.3",
     "pug": "^2.0.4",
     "sequelize": "^5.21.8",
