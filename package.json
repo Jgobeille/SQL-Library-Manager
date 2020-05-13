@@ -24,6 +24,7 @@
   "homepage": "https://github.com/Jgobeille/SQL-Library-Manager#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "nodemon": "^2.0.3",
     "pug": "^2.0.4",
     "sequelize": "^5.21.8",
     "sequelize-cli": "^5.5.1",
