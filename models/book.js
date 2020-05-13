@@ -1,5 +1,11 @@
 const Sequelize = require('sequelize');
 
+/**
+ * Creates all models for db
+ * @exports models to be used to update db
+ * @return {Object} Book model object
+ */
+
 module.exports = (sequelize) => {
   class Book extends Sequelize.Book {}
 
@@ -36,10 +42,10 @@ module.exports = (sequelize) => {
         validate: {
           notEmpty: {
             // custom error message
-            msg: 'Please provide a value for "title"',
+            msg: 'Please provide a value for "author"',
           },
           notNull: {
-            msg: 'Please provide a value for "title"',
+            msg: 'Please provide a value for "author"',
           },
         },
       },
@@ -54,6 +60,7 @@ module.exports = (sequelize) => {
     },
     //arg2: model options
     {
+      paranoid: true, //enable "soft" deletes
       sequelize, //same as {sequelize: sequelize}
     }
   );
