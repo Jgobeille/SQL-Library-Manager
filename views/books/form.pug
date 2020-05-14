@@ -1,3 +1,5 @@
+- var value = book.title;
+
 p
     label(for='title') Title
     input#title(name='title' type='text' value=book.title)
@@ -10,7 +12,11 @@ p
 p
     label(for='year') Year
     input#year(name='year' type='text' value=book.year)
-p
-    input(type='submit' value='Create New Book')
+if (!value)      
+    p
+        input(type='submit' value='Create New Book' )
+else
+    p
+        input(type='submit' value='Update Book' )
 p
     a.button(href='/books') Cancel
