@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const express = require('express');
 const { Book } = require('../models');
 // creates mini express server
@@ -19,8 +18,8 @@ function asyncHandler(cb) {
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const book = await Book.findAll({ order: [['createdAt', 'DESC']] });
-    res.render('books/index', { book, title: 'Books' });
+    const books = await Book.findAll({ order: [['createdAt', 'DESC']] });
+    res.render('books/index', { books, title: 'Books' });
   })
 );
 
