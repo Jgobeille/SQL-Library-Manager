@@ -60,7 +60,6 @@ module.exports = (sequelize) => {
     },
     // arg2: model options
     {
-      paranoid: true, // enable "soft" deletes
       sequelize, // same as {sequelize: sequelize}
     }
   );

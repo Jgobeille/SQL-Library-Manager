@@ -3,10 +3,6 @@ const { Book } = require('../models');
 // creates mini express server
 const router = express.Router();
 
-(async () => {
-  await Book.sequelize.sync({ force: true });
-})();
-
 /* Handler function to wrap each route. */
 function asyncHandler(cb) {
   return async (req, res, next) => {
