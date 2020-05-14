@@ -1,35 +1,39 @@
 /* eslint-disable no-console */
+/* eslint-disable prefer-template */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-shadow */
+/* eslint-disable vars-on-top */
 /* eslint-disable no-use-before-define */
-// !/usr/bin/env node
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/order */
+/* eslint-disable no-var */
 
 /**
  * Module dependencies.
  */
 
-const debug = require('debug')('sql-library-manager:server');
-const http = require('http');
-const { sequelize } = require('../models');
-const app = require('../app');
+var app = require('../app');
+var debug = require('debug')('sequelize-with-express:server');
+var http = require('http');
+var sequelize = require('../models').sequelize;
 
 /**
  * Get port from environment and store in Express.
  */
 
-// eslint-disable-next-line no-use-before-define
-const port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-const server = http.createServer(app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-// eslint-disable-next-line no-undef
 sequelize.sync({ force: true }).then(() => {
   server.listen(port);
 });
@@ -41,12 +45,8 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  // eslint-disable-next-line no-shadow
-  // eslint-disable-next-line prefer-const
-  // eslint-disable-next-line no-shadow
-  const port = parseInt(val, 10);
+  var port = parseInt(val, 10);
 
-  // eslint-disable-next-line no-restricted-globals
   if (isNaN(port)) {
     // named pipe
     return val;
@@ -69,16 +69,16 @@ function onError(error) {
     throw error;
   }
 
-  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
+      console.error(bind + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(`${bind} is already in use`);
+      console.error(bind + ' is already in use');
       process.exit(1);
       break;
     default:
@@ -91,7 +91,7 @@ function onError(error) {
  */
 
 function onListening() {
-  const addr = server.address();
-  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  debug(`Listening on ${bind}`);
+  var addr = server.address();
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  debug('Listening on ' + bind);
 }

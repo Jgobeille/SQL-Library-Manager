@@ -109,7 +109,6 @@ router.post(
   '/:id/delete',
   asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id);
-    console.log(book);
     if (book) {
       // delete book
       await book.destroy();

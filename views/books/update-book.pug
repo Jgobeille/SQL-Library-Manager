@@ -3,6 +3,9 @@ extends ../layout
 block content
   h2= title
   
-  form(action="/books/" + book.id + "/delete", method="post")
+  include errors
+  
+  form(action="/books/" + book.id, method="post")
     include form
-    include delete-form
+  
+  include delete-form
