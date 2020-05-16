@@ -24,22 +24,21 @@ router.get(
     page = parseInt(page);
     const limit = 5;
     const offset = page * limit - limit;
-
-    const allBooks = await Book.findAndCountAll({
-      order: [['TITLE', 'ASC']],
-      limit,
-      offset,
-    }).then((books) => {
-      const numOfPages = Math.ceil(books.count / 5);
-      if (page <= numOfPages) {
-        res.render('books/', { books, title: 'Books' });
-      } else {
-        next();
-      }
-    });
-
-    if (!allBooks) {
-      next();
+    try {
+      await Book.findAndCountAll({
+        order: [['TITLE', 'ASC']],
+        limit,
+        offset,
+      }).then((books) => {
+        const numOfPages = Math.ceil(books.count / 5);
+        if (page <= numOfPages) {
+          res.render('books/', { books, title: 'Books' });
+        } else {
+          next();
+        }
+      });
+    } catch (error) {
+      next(error);
     }
   })
 );
