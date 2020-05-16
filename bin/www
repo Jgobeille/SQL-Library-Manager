@@ -34,7 +34,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-sequelize.sync({force: true}).then(() => {
+sequelize.sync().then(() => {
   console.log('All Models were synced');
   server.listen(port);
 });
