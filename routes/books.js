@@ -18,13 +18,15 @@ function asyncHandler(cb) {
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
+    console.log(req.query);
     let { page } = req.query;
     // eslint-disable-next-line radix
     page = parseInt(page);
     const limit = 5;
     const offset = page * limit - limit;
-    Book.findAndCountAll({
-      order: [['YEAR', 'DESC']],
+
+    const allBooks = await Book.findAndCountAll({
+      order: [['TITLE', 'ASC']],
       limit,
       offset,
     }).then((books) => {
@@ -35,6 +37,10 @@ router.get(
         next();
       }
     });
+
+    if (!allBooks) {
+      next();
+    }
   })
 );
 
@@ -122,7 +128,7 @@ router.post(
     if (book) {
       // delete book
       await book.destroy();
-      res.redirect('/books');
+      res.redirect('/books/?page=1');
     } else {
       next();
     }
