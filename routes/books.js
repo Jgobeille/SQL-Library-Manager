@@ -18,7 +18,7 @@ function asyncHandler(cb) {
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const books = await Book.findAll({ order: [['createdAt', 'DESC']] });
+    const books = await Book.findAll({ order: [['YEAR', 'DESC']] });
     res.render('books/index', { books, title: 'Books' });
   })
 );
@@ -58,12 +58,12 @@ router.post(
 /* GET individual book. */
 router.get(
   '/:id',
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const book = await Book.findByPk(req.params.id);
     if (book) {
       res.render('books/update-book', { book });
     } else {
-      res.sendStatus(404);
+      next();
     }
   })
 );
@@ -71,7 +71,7 @@ router.get(
 /* Update book. */
 router.post(
   '/:id',
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     let book;
     try {
       // get book from database based on params.id
@@ -82,7 +82,7 @@ router.post(
         // redirect to the updated book page
         res.redirect(`/books/${book.id}`);
       } else {
-        res.sendStatus(404);
+        next();
       }
     } catch (error) {
       if (error.name === 'SequelizeValidationError') {
@@ -103,14 +103,14 @@ router.post(
 /* Delete individual book. */
 router.post(
   '/:id/delete',
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const book = await Book.findByPk(req.params.id);
     if (book) {
       // delete book
       await book.destroy();
       res.redirect('/books');
     } else {
-      res.sendStatus(404);
+      next();
     }
   })
 );

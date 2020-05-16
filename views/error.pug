@@ -2,5 +2,9 @@ extends layout
 
 block content
   h1= message
+  p Sorry! We couldn&apos;t find the page you were looking for.
   h2= error.status
   pre #{error.stack}
+  p
+    a.button(href='/books') Home
+
