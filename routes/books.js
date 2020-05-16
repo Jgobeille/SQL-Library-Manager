@@ -9,7 +9,7 @@ function asyncHandler(cb) {
     try {
       await cb(req, res, next);
     } catch (error) {
-      res.status(500).send(error);
+      next();
     }
   };
 }
@@ -17,9 +17,24 @@ function asyncHandler(cb) {
 /* GET books listing. */
 router.get(
   '/',
-  asyncHandler(async (req, res) => {
-    const books = await Book.findAll({ order: [['YEAR', 'DESC']] });
-    res.render('books/index', { books, title: 'Books' });
+  asyncHandler(async (req, res, next) => {
+    let { page } = req.query;
+    // eslint-disable-next-line radix
+    page = parseInt(page);
+    const limit = 5;
+    const offset = page * limit - limit;
+    Book.findAndCountAll({
+      order: [['YEAR', 'DESC']],
+      limit,
+      offset,
+    }).then((books) => {
+      const numOfPages = Math.ceil(books.count / 5);
+      if (page <= numOfPages) {
+        res.render('books/', { books, title: 'Books' });
+      } else {
+        next();
+      }
+    });
   })
 );
 
@@ -35,7 +50,6 @@ router.post(
     let book;
 
     try {
-      console.log(req.body);
       book = await Book.create(req.body);
 
       res.redirect(`/books/${book.id}`);
