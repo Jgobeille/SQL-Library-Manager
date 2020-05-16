@@ -59,10 +59,98 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Harry Potter and the Deathly Hallows',
-        author: 'JK Rowling',
+        title: 'Avatar: The last Airbender - The Rise of Kyoshi',
+        author: 'F.C. Yee',
         Genre: 'Fantasy',
-        year: 2007,
+        year: 2019,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Norwegian Wood',
+        author: 'Haruki Murakami',
+        Genre: 'Fiction',
+        year: 1987,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Naomi',
+        author: 'Junichiro Tanizaki',
+        Genre: 'Fiction',
+        year: 1924,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Freakonomics',
+        author: 'Steven D. Levitt',
+        Genre: 'Non Fiction',
+        year: 2005,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Batman: The Killing Joke',
+        author: 'Alan Moore',
+        Genre: 'Comics',
+        year: 1988,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Our Revolution',
+        author: 'Bernie Sanders',
+        Genre: 'Political',
+        year: 2016,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Kitchen Confidential',
+        author: 'Anthony Bourdain',
+        Genre: 'Non Fiction',
+        year: 2000,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Coraline',
+        author: 'Neil Gaiman',
+        Genre: 'Fantasy',
+        year: 2002,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'American Gods',
+        author: 'Neil Gaiman',
+        Genre: 'Fantasy',
+        year: 2001,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Lord of the Rings: The Fellowship of the Ring',
+        author: 'J.R.R Tolkien',
+        Genre: 'Fantasy',
+        year: 1954,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Lord of the Rings: The Two Towers',
+        author: 'J.R.R Tolkien',
+        Genre: 'Fantasy',
+        year: 1954,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Lord of the Rings: The Return of the King',
+        author: 'J.R.R Tolkien',
+        Genre: 'Fantasy',
+        year: 1955,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -71,10 +159,6 @@ module.exports = {
 
   // eslint-disable-next-line no-unused-vars
   down: (queryInterface, Sequelize) => {
-    return queryInterface.destroy({
-      where: {
-        genre: 'Non Fiction',
-      },
-    });
+    return queryInterface.bulkDelete('books', null, {});
   },
 };
