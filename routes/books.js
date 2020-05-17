@@ -18,28 +18,27 @@ function asyncHandler(cb) {
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
-    console.log(req.query);
     let { page } = req.query;
     // eslint-disable-next-line radix
     page = parseInt(page);
     const limit = 5;
     const offset = page * limit - limit;
-    try {
-      await Book.findAndCountAll({
-        order: [['TITLE', 'ASC']],
-        limit,
-        offset,
-      }).then((books) => {
+    await Book.findAndCountAll({
+      order: [['TITLE', 'ASC']],
+      limit,
+      offset,
+    })
+      .then((books) => {
         const numOfPages = Math.ceil(books.count / 5);
         if (page <= numOfPages) {
           res.render('books/', { books, title: 'Books' });
         } else {
           next();
         }
+      })
+      .catch((error) => {
+        next(error);
       });
-    } catch (error) {
-      next(error);
-    }
   })
 );
 
