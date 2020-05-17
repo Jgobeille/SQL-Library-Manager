@@ -79,7 +79,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const book = await Book.findByPk(req.params.id);
     if (book) {
-      res.render('books/update-book', { book });
+      res.render('books/update-book', { book, title: 'Update Book' });
     } else {
       next();
     }
