@@ -2,8 +2,9 @@ extends ../layout
 
 block content
     h1 Books
-    p
+    .buttons-container
         a.button(href='/books/new') Create New Book
+        include search-bar
     table
         thead
             tr

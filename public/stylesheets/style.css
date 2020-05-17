@@ -40,9 +40,7 @@ input[type=submit]:hover {
   background-color: #01b189;
 }
 
-p {
-  margin: 20px auto;
-}
+
 
 ul {
   padding: 0;
@@ -123,13 +121,13 @@ input[type=text] {
 
 .search-submit {
   cursor: pointer;
-  height: 33px;
+  height: 36px;
   background: rgba(245, 245, 245, 0.9);
   border-radius: 0 0.25rem 0.25rem 0;
   border: 1px solid rgba(200, 200, 200, 0.9);
-  transition: 0.4s ease-out;
   outline: none;
   box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+  margin-left: 10px !important;
 }
 
 .search-submit:active,
@@ -137,4 +135,14 @@ input[type=text] {
 .search-submit:focus {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(50, 50, 50, 0.9);
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 735px;
+  margin-bottom: 20px;
 }
