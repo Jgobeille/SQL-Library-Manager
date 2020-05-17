@@ -1,5 +1,7 @@
 const express = require('express');
+const { Op } = require('sequelize');
 const { Book } = require('../models');
+
 // creates mini express server
 const router = express.Router();
 
@@ -130,6 +132,56 @@ router.post(
     } else {
       next();
     }
+  })
+);
+
+/* Search Feature */
+
+/**
+ * STEPS
+ * 1.) Declare Route /search/Query
+ * 2.) Wrap in AsyncHandler
+ * 3.) Use FindAndCountAll
+ * 4.) Pass in Query string to check against all results.
+ * Look at SQL methods to accomplish this
+ * 5.) Create search Results page to show results
+ * 6.) render results onto page
+ */
+router.post(
+  '/search-result/',
+  asyncHandler(async (req, res, next) => {
+    const { search } = req.body;
+    console.log(search);
+
+    await Book.findAndCountAll({
+      where: {
+        [Op.or]: {
+          title: {
+            [Op.substring]: search,
+          },
+          author: {
+            [Op.substring]: search,
+          },
+          genre: {
+            [Op.substring]: search,
+          },
+          year: {
+            [Op.substring]: search,
+          },
+        },
+      },
+      order: [['TITLE', 'ASC']],
+    })
+      .then((books) => {
+        if (books) {
+          res.render('books/', { books, search, title: 'Books' });
+        } else {
+          next();
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
   })
 );
 
