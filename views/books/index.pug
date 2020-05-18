@@ -24,18 +24,17 @@ block content
                 td= book.author 
                 td= book.genre
                 td= book.year
-    if search
 
-        -var n = 1;
-        -var n2 = 1;
-        -var numOfPages = Math.ceil(books.count / 5);
-        div.pagination
-            ul
-                while n,n2 <= numOfPages
-                    a(class="button space" name="page" href=`/books/search-result/?q=${search}&page=${n2++}`)=n++
+
+    -var n = 1;
+    -var n2 = 1;
+    -var numOfPages = Math.ceil(books.count / 5);
+    div.pagination
+        ul
+            while n,n2 <= numOfPages
+                a(class="button space" name="page" href=`/books/search-result/?q=${search}&page=${n2++}`)=n++
+    if search
         p.back-btn
             a(class="button back" href='/books/?page=1') Back
-    else
-        p.back-btn
-            a(class="button back" href='/books/?page=1') Back
+
         
