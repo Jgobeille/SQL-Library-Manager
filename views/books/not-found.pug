@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    h1 Not Found
+    .buttons-container
+        a.button(href='/books/new') Create New Book
+        form(action=`/books/search-result/?q=${search}&page=1`  method='POST')
+            input#search-input.search-input(type='search' name="search" placeholder='Search...' required)
+            input#search-submit.search-submit(type='submit' value='🔍')
+
+    p Sorry! Your search did not find any results for #{search}!
+  
+    p
+        a.button(href='/books/?page=1') Back
+

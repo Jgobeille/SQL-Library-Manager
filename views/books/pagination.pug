@@ -4,6 +4,6 @@
 div.pagination
     ul
         while n,n2 <= numOfPages
-            a(class="button space" href=`/books/?page=${n2++}`)=n++
+            a(class="button space"  name="page" href=`/books/?page=${n2++}`)=n++
 
 

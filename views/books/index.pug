@@ -6,7 +6,9 @@ block content
     h2=search
     .buttons-container
         a.button(href='/books/new') Create New Book
-        include search-bar
+        form(action=`/books/search-result/?q=${search}&page=1`  method='POST')
+            input#search-input.search-input(type='search' name="search" placeholder='Search...' required)
+            input#search-submit.search-submit(type='submit' value='🔍')
     table
         thead
             tr
@@ -23,7 +25,17 @@ block content
                 td= book.genre
                 td= book.year
     if search
-        p
-            a.button(href='/books/?page=1') Back
+
+        -var n = 1;
+        -var n2 = 1;
+        -var numOfPages = Math.ceil(books.count / 5);
+        div.pagination
+            ul
+                while n,n2 <= numOfPages
+                    a(class="button space" name="page" href=`/books/search-result/?q=${search}&page=${n2++}`)=n++
+        p.back-btn
+            a(class="button back" href='/books/?page=1') Back
     else
-        include pagination
+        p.back-btn
+            a(class="button back" href='/books/?page=1') Back
+        

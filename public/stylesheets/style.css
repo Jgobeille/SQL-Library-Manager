@@ -101,6 +101,10 @@ input[type=text] {
   margin-right: .5em;
 }
 
+.back-btn {
+  margin-top: 30px;
+}
+
 /* Search bar */
 .search-input {
   font-size: .8em;
@@ -145,4 +149,9 @@ input[type=text] {
   width: 100%;
   max-width: 735px;
   margin-bottom: 20px;
+}
+
+pre {
+  white-space: normal;
+  word-break: break-all;
 }

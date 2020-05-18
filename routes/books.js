@@ -17,6 +17,7 @@ function asyncHandler(cb) {
 }
 
 /* GET books listing. */
+
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
@@ -147,11 +148,17 @@ router.post(
  * 5.) Create search Results page to show results
  * 6.) render results onto page
  */
+
 router.post(
   '/search-result/',
   asyncHandler(async (req, res, next) => {
     const { search } = req.body;
-    console.log(search);
+
+    let { page } = req.query;
+    // eslint-disable-next-line radix
+    page = parseInt(page);
+    const limit = 5;
+    const offset = page * limit - limit;
 
     await Book.findAndCountAll({
       where: {
@@ -171,12 +178,63 @@ router.post(
         },
       },
       order: [['TITLE', 'ASC']],
+      limit,
+      offset,
     })
       .then((books) => {
-        if (books) {
-          res.render('books/', { books, search, title: 'Books' });
+        console.log(books);
+        if (books.count > 0) {
+          res.render('books/', { books, search, page, title: 'Books' });
         } else {
+          res.render('books/not-found', { search });
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  })
+);
+
+router.get(
+  '/search-result/',
+  asyncHandler(async (req, res, next) => {
+    const search = req.query.q;
+
+    let { page } = req.query;
+    // eslint-disable-next-line radix
+    page = parseInt(page);
+    const limit = 5;
+    const offset = page * limit - limit;
+
+    await Book.findAndCountAll({
+      where: {
+        [Op.or]: {
+          title: {
+            [Op.substring]: search,
+          },
+          author: {
+            [Op.substring]: search,
+          },
+          genre: {
+            [Op.substring]: search,
+          },
+          year: {
+            [Op.substring]: search,
+          },
+        },
+      },
+      order: [['TITLE', 'ASC']],
+      limit,
+      offset,
+    })
+      .then((books) => {
+        const numOfPages = Math.ceil(books.count / 5);
+        if (page > numOfPages) {
           next();
+        } else if (books.count > 0) {
+          res.render('books/', { books, search, page, title: 'Books' });
+        } else {
+          res.render('books/not-found', { search });
         }
       })
       .catch((error) => {
