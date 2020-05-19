@@ -2,10 +2,10 @@ extends ../layout
 
 
 block content
-    h1 Books
+    h1 Library Database
     .buttons-container
         a.button(href='/books/new') Create New Book
-        form(action=`/books/search-result/?q=&page=1`  method='POST')
+        form(action=`/books/search-result/?q&page=1`  method='POST')
             input#search-input.search-input(type='search' name="search" placeholder='Search...' required)
             input#search-submit.search-submit(type='submit' value='🔍')
     table

@@ -1,11 +1,11 @@
 extends ../layout
 
 block content
-  h2 Update Book
-  
-  include errors
-  
-  form(action="/books/" + book.id, method="post")
-    include form
-  
-  include delete-form
+    h1 Update Book
+
+    include errors
+
+    form(action="/books/" + book.id, method="post")
+      include form
+
+    include delete-form
