@@ -150,15 +150,9 @@ router.post(
  */
 
 router.post(
-  '/search-result/',
+  '/search',
   asyncHandler(async (req, res, next) => {
     const { search } = req.body;
-
-    let { page } = req.query;
-    // eslint-disable-next-line radix
-    page = parseInt(page);
-    const limit = 5;
-    const offset = page * limit - limit;
 
     await Book.findAndCountAll({
       where: {
@@ -178,13 +172,10 @@ router.post(
         },
       },
       order: [['TITLE', 'ASC']],
-      limit,
-      offset,
     })
       .then((books) => {
-        console.log(books);
         if (books.count > 0) {
-          res.render('books/', { books, search, page, title: 'Books' });
+          res.redirect(`/books/search?q=${search}&page=1`);
         } else {
           res.render('books/not-found', { search });
         }
@@ -196,11 +187,12 @@ router.post(
 );
 
 router.get(
-  '/search-result/',
+  '/search/',
   asyncHandler(async (req, res, next) => {
     const search = req.query.q;
 
     let { page } = req.query;
+
     // eslint-disable-next-line radix
     page = parseInt(page);
     const limit = 5;
@@ -232,7 +224,7 @@ router.get(
         if (page > numOfPages) {
           next();
         } else if (books.count > 0) {
-          res.render('books/', { books, search, page, title: 'Books' });
+          res.render('books/', { books, search, title: 'Books' });
         } else {
           res.render('books/not-found', { search });
         }

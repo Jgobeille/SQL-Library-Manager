@@ -5,7 +5,7 @@ block content
     h1 Library Database
     .buttons-container
         a.button(href='/books/new') Create New Book
-        form(action=`/books/search-result/?q&page=1`  method='POST')
+        form(action=`/books/search/`  method='POST')
             input#search-input.search-input(type='search' name="search" placeholder='Search...' required)
             input#search-submit.search-submit(type='submit' value='🔍')
     table
@@ -31,7 +31,7 @@ block content
         div.pagination
             ul
                 while n,n2 <= numOfPages
-                    a(class="button space" name="page" href=`/books/search-result/?q=${search}&page=${n2++}`)=n++
+                    a(class="button space" name="page" href=`/books/search/?q=${search}&page=${n2++}`)=n++
             p.back-btn
                 a(class="button back" href='/books/?page=1') Back
     else
