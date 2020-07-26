@@ -20,7 +20,7 @@ Then:
 
 This project is a mock library database application. It uses one of the most popular databases(SQLite) to store data. Additionally, this app uses Node.JS and Sequelize to perform CRUD(Create, Read, Update, and Delete) operations that allow a user to update the database with new or existing information as well as delete information.
 
-For a live demo if this project, go to this link: COMING SOON
+For a live demo if this project, go to this link: https://sql-library-database-app.herokuapp.com/
 
 ## Motivation
 
